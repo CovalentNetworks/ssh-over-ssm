@@ -63,9 +63,11 @@ Match host i-*
 ```
 Above we've configured the bastion hosts in each environment for SSH access over SSM, specifying the username, instance ID and host to use for local commands i.e. `ssh {host}`. We've added the `AWS_PROFILE` that corresponds to each environment to the `ProxyCommand` so we don't need to manually provide credentials. 
 
+`Hostname` in the configuration file is the AWS EC2 instance id for each environment's bastion host. There are not particularly human readable but should very rarely if ever change from the values in the configuration file above. 
+
 `LocalForward` handles setting up the SSH tunnel to each environment's database endpoint automatically when connecting to the host. Occasionally the endpoints for a database may change. While an attempt will be made to communicate these changes to the team and keep this example configuration up to date, upon connection failures you can look for the RDS endpoint you are trying to reach in the AWS RDS console and ensure that your configuration is up to date. The first port number after `LocalForward` is the local port, this can be changed if your local `5432` is being used or you want to use some other port for your local connection.  
 
-Finally `ExitOnForwardFailure` ends the SSH connection automatically if the port forwarding fails.
+`ExitOnForwardFailure` ends the SSH connection automatically if the port forwarding fails.
 
 ### How to use
 
