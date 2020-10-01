@@ -58,6 +58,7 @@ host govRDS
     ProxyCommand bash -c "AWS_PROFILE=gov ssh-ssm.sh %h %r"
 Match host i-*
     IdentityFile ~/.ssh/ssm-ssh-tmp
+    IdentitiesOnly yes
     PasswordAuthentication no
     GSSAPIAuthentication no
 ```
